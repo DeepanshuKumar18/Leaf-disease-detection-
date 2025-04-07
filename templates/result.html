@@ -111,15 +111,6 @@
                 </ul>
             </div>
             {% endif %}
-
-            <div class="result-card">
-                <h2>Individual Model Prediction</h2>
-                <ul>
-                    {% for model, votes in model_votes.items() %}
-                    <li><strong>{{ model }}:</strong> {{ votes | join(', ') }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
            
             <div style="text-align:center; margin-top:1rem;">
                 <a href="/" class="btn"><i class="fas fa-home"></i> Home</a>
