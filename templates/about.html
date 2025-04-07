@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About | Leaf Disease Detection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0fdf4;
+            color: #2e4e36;
+        }
+
+        header {
+            background: #b2fab4;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #1b5e20;
+        }
+
+        section {
+            width: 100%;
+            padding: 60px 10%;
+            background: #fff;
+            border-bottom: 1px solid #dfe6e2;
+        }
+
+        section:nth-child(even) {
+            background: #f4fbf4;
+        }
+
+        h1, h2 {
+            color: #1b5e20;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        a {
+            color: #1b5e20;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-info {
+            background: #e8f5e9;
+            border-left: 6px solid #4caf50;
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 15px;
+            color: #666;
+            background: #dcedc8;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 40px 5%;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            p, li {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>🌿 Leaf Disease Detection</header>
+
+    <section>
+        <h1>About This Project</h1>
+        <p><strong>Leaf Disease Detection</strong> is a smart AI-based platform built to detect diseases in plant leaves using deep learning and computer vision techniques. Our goal is to simplify disease detection for farmers, agronomists, researchers, and students. This platform combines the power of science and technology to prevent crop loss and improve agricultural productivity.</p>
+        <p>With just a single image upload or webcam capture, users can quickly detect plant diseases and get actionable solutions. Whether you're managing a small garden or large-scale agriculture, our app brings instant plant diagnostics to your fingertips.</p>
+    </section>
+
+    <section>
+        <h2>🚀 What We Do</h2>
+        <p>We harness the capabilities of an ensemble of deep learning models (InceptionV3, ResNet50, and VGG16) to provide highly accurate predictions of leaf diseases. Our system has been trained on a diverse dataset of plant images, allowing it to differentiate between healthy and diseased leaves.</p>
+        <p>Our web interface allows users to either upload an image or take a live snapshot using a webcam. Once submitted, the system analyzes the image and provides not just the disease name, but also a brief description and potential treatments or preventive measures.</p>
+    </section>
+
+    <section>
+        <h2>🌱 Key Features</h2>
+        <ul>
+            <li>📸 Real-time Webcam Integration</li>
+            <li>🗄️ Image Upload Support</li>
+            <li>🤖 Ensemble Model (InceptionV3 + ResNet50 + VGG16)</li>
+            <li>📄 Disease Solutions Based on Model Output</li>
+            <li>📂 Clean, Responsive Design</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>🩴 Supported Diseases</h2>
+        <p>Our model currently detects the following 14 plant leaf diseases:</p>
+        <ul>
+            <li>Apple Scab</li>
+            <li>Apple Black Rot</li>
+            <li>Apple Cedar Rust</li>
+            <li>Apple Healthy</li>
+            <li>Corn Gray Leaf Spot</li>
+            <li>Corn Common Rust</li>
+            <li>Corn Northern Leaf Blight</li>
+            <li>Corn Healthy</li>
+            <li>Grape Black Rot</li>
+            <li>Grape Esca</li>
+            <li>Grape Leaf Blight</li>
+            <li>Potato Early Blight</li>
+            <li>Potato Late Blight</li>
+            <li>Potato Healthy</li>
+        </ul>
+        <p><em>We are working on expanding our dataset and model capabilities to include more crops and diseases soon.</em></p>
+    </section>
+
+    <section>
+        <h2>💡 Why It Matters</h2>
+        <p>Plant diseases can lead to massive crop loss and food insecurity. Manual inspection is often time-consuming, expensive, and error-prone. Our tool automates and accelerates this process, reducing the burden on farmers and enabling more precise disease management.</p>
+        <p>By providing instant feedback, we help minimize damage, reduce chemical use, and support sustainable agricultural practices. Ultimately, this means better yields, healthier crops, and smarter farming decisions.</p>
+    </section>
+
+    <section>
+        <h2>🛠️ Technologies Used</h2>
+        <ul>
+            <li>Python, Flask (Backend)</li>
+            <li>TensorFlow / Keras (Model Training)</li>
+            <li>OpenCV (Webcam Processing)</li>
+            <li>HTML, CSS, JS (Frontend)</li>
+        </ul>
+    </section>
+    <section>
+        <h2>📬 Contact</h2>
+        <div class="contact-info">
+            <p><strong>Email:</strong> <a href="mailto:deepanshu@example.com">Email@example.com</a></p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
+            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a></p>
+        </div>
+    </section>
+
+</body>
+</html>

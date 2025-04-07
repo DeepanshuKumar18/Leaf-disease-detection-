@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+       
+        :root { 
+            --primary: #4CAF50; 
+            --dark: #2E7D32; 
+            --light: #E8F5E9; 
+        }
+       
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            background-image: url("https://www.shutterstock.com/image-photo/photo-collages-diverse-plants-crops-600nw-2376971765.jpg"); 
+            background-size: cover;  /* Ensures image covers the full viewport */
+            background-repeat: no-repeat;  /* Prevents repetition */
+            background-position: center;  /* Centers the image */
+            background-attachment: fixed;  /* Makes background fixed when scrolling */
+        }
+       
+        .container {
+            max-width: 900px; 
+            border-radius:15px;
+            border:5px solid var(--dark); 
+            margin: 2rem auto; 
+        }
+       
+        .card { 
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 2rem; 
+        }
+       
+        h1 { 
+            color: var(--dark); 
+            text-align: center;
+             border-bottom: 2px solid var(--primary); 
+             padding-bottom: 0.5rem; 
+        }
+       
+        .grid {
+             display: grid;
+              grid-template-columns: 1fr 1fr; 
+              gap: 1rem;
+               margin: 1rem 0; 
+        }
+       
+        img { 
+            max-width: 100%; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+       
+        .result-card { 
+            background: var(--light); 
+            padding: 1rem; 
+            border-left: 4px solid var(--dark);
+             margin-bottom: 1rem; 
+        }
+       
+        .btn { 
+            display: inline-block; 
+            padding: 0.6rem 1.2rem; 
+            background: var(--primary); 
+            color: white;
+            border: none; 
+            border-radius: 4px; 
+            margin: 0.5rem;
+            text-decoration: none; 
+        }
+        .btn:hover {
+            background-color: #00710b;
+        }
+     
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1><i class="fas fa-leaf"></i> Disease Report</h1>
+            
+            <div class="grid">
+                <div>
+                    <img src="{{ image_path }}" alt="Leaf image">
+                </div>
+                <div>
+                    <div class="result-card">
+                        <h2>{{ predicted_class }}</h2>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h2><i class="fas fa-lightbulb"></i> Solution</h2>
+                        <p>{{ solution }}</p>
+                    </div>
+                </div>
+            </div>
+                     
+            {% if search_results_json %}
+            <div class="result-card">
+                <h2><i class="fas fa-link"></i> Resources</h2>
+                <ul>
+                    {% for result in search_results_json %}
+                    <li><a href="{{ result }}" target="_blank">{{ result[:40] }}...</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="result-card">
+                <h2>Individual Model Prediction</h2>
+                <ul>
+                    {% for model, votes in model_votes.items() %}
+                    <li><strong>{{ model }}:</strong> {{ votes | join(', ') }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+           
+            <div style="text-align:center; margin-top:1rem;">
+                <a href="/" class="btn"><i class="fas fa-home"></i> Home</a>
+                <a href="/index" class="btn"><i class="fas fa-redo"></i> New Scan</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

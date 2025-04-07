@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leaf Disease Prediction</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      background-color: #f7f7f7;
+      text-align: center;
+      background: #edede9;
+      background-image: url("https://www.shutterstock.com/image-photo/photo-collages-diverse-plants-crops-600nw-2376971765.jpg"); 
+      background-repeat: no-repeat;
+      background-size: cover; 
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    
+    .bg-image {
+      background-image: url("https://www.shutterstock.com/image-photo/photo-collages-diverse-plants-crops-600nw-2376971765.jpg"); 
+      filter: blur(1px);
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: fixed;
+      width: 100%;
+      z-index: -1;
+    }
+
+    p{
+    background-color: #fff3cd; 
+    color: #856404; 
+    border: 1px solid #ffeeba; 
+    padding: 5px; 
+    border-radius: 20px;
+    position: absolute;
+    right: 10px;
+    }
+
+    .bg-text {
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      font-weight: bold;
+      border: 3px solid #f1f1f1;
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      width: 80%;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    h1 {
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
+
+    form {
+      margin: 20px;
+    }
+
+    .file-upload-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .camera-icon {
+      color: black;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .custom-upload {
+      background-color: white;
+      color: black;
+      padding: 10px 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .custom-upload:hover {
+      background-color: #e6e6e6;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    #file-chosen {
+      color: white;
+      font-weight: bold;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      border-radius: 4px;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      margin: 5px;
+    }
+
+    .btn:hover {
+      background-color: #00710b;
+    }
+
+    video, #captured-image {
+      width: 300px;
+      border-radius: 8px;
+      margin: 10px;
+      text-align: center;
+    }
+
+    #webcam-section {
+      display: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;      /* center content horizontally */
+      justify-content: center;  /* center content vertically if needed */
+      margin-bottom: 20px; 
+    }
+
+
+    #captured-image {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-image"></div>
+  <p>
+    <strong>Note:</strong> This system currently supports <strong>14 plant types</strong>. Uploading other plant leaves may result in inaccurate predictions or "Unknown" results.
+  <p>
+  
+  <div class="bg-text">
+    
+    
+    <h1>LEAF DISEASE DETECTION</h1>
+
+    <form action="/" method="post" enctype="multipart/form-data">
+      <h3>Select an Image</h3>
+
+      <div class="file-upload-wrapper">
+        <i class="fas fa-camera camera-icon" onclick="showWebcam()"></i>
+        <label for="file-upload" class="custom-upload">Choose File</label>
+        <input type="file" id="file-upload" name="file" accept="image/*">
+        <span id="file-chosen">No file chosen</span>
+      </div>
+
+      <div id="webcam-section">
+        <video id="webcam" autoplay></video><br>
+        <img id="captured-image" alt="Captured Image" />
+        <input type="hidden" name="webcam_image" id="webcam_image">
+        <button type="button" class="btn btn-webcam" onclick="captureImage()">Capture Image</button><br>
+      </div>
+
+      <button type="submit" class="btn">Predict</button>
+    </form>
+
+    <div>
+      <a href="/" class="btn"><i class="fas fa-home"></i> Home</a>
+    </div>
+  </div>
+
+  <canvas id="canvas" style="display:none;"></canvas>
+
+  <script>
+    const video = document.getElementById('webcam');
+    const canvas = document.getElementById('canvas');
+    const webcamInput = document.getElementById('webcam_image');
+    const webcamSection = document.getElementById('webcam-section');
+    const capturedImg = document.getElementById('captured-image');
+    let stream = null;
+
+    function showWebcam() {
+      webcamSection.style.display = 'flex';
+      capturedImg.style.display = 'none'; // Hide previous image
+
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(s => {
+          stream = s;
+          video.srcObject = stream;
+          video.style.display = 'block';
+        })
+        .catch(err => {
+          alert("Unable to access webcam.");
+          console.error(err);
+        });
+    }
+
+    function captureImage() {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0);
+
+      const dataURL = canvas.toDataURL('image/jpeg');
+      webcamInput.value = dataURL;
+
+      // Stop webcam
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+
+      // Show captured image, hide webcam
+      video.style.display = 'none';
+      capturedImg.src = dataURL;
+      capturedImg.style.display = 'block';
+
+    }
+
+    const fileUpload = document.getElementById("file-upload");
+    const fileChosen = document.getElementById("file-chosen");
+
+    fileUpload.addEventListener("change", function () {
+      fileChosen.textContent = this.files[0]?.name || "No file chosen";
+    });
+  </script>
+</body>
+</html>

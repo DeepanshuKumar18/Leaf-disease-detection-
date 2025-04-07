@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Identifier</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #e0ffe0;
+    padding: 15px;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: green;
+}
+.navbar p{
+    background-color: #fff3cd; 
+    color: #856404; 
+    border: 1px solid #ffeeba; 
+    padding: 5px; 
+    border-radius: 20px;
+    position: absolute;
+    right: 100px;
+
+}
+
+.navbar ul{                            /* about */
+    list-style: none; 
+    background-color: #1ABC9C;
+    font-weight: bold;
+    padding: 5px; 
+    border-radius: 20px;
+    border: 1px;
+    margin: 0 15px 0 5px;
+
+ }   
+
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+.navbar ul li a:hover {
+    color:#2d1bd5
+}
+
+.disease-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.disease-card {
+    width: 200px;
+    margin: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.disease-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.intro {
+    width: 50%; 
+    margin: 0 auto; 
+    text-align: center; 
+}
+
+.container {
+    max-width: 1100px;
+    margin: 50px auto;
+    background: linear-gradient(135deg, #D4F8C4, #A0E4B0);
+    padding: 40px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.text-section {
+    max-width: 50%;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #222;
+}
+
+p {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.5;
+}
+
+.button1 {                                        /*Button 1*/
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: #1ABC9C;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.button1:hover {
+    background-color: #16A085; 
+} 
+.button1 img {
+    width: 20px;
+    height: 20px;
+} 
+                                                  /*image*/
+.image-section img {
+    align-items: center;
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+}
+.info {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 50px;                          
+    display: block;
+    transition: all 0.3s ease-in-out;
+}
+
+.info:hover {
+    white-space: normal;
+    height: auto;
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1 class="logo">Leaf Disease Detection</h1>
+            <p> <strong>Note:</strong> This system currently supports <strong>14 plant types</strong>. Uploading other plant leaves may result in inaccurate predictions or "Unknown" results. </p>
+            <ul>
+                <!-- <li><a href="about.html">About</a></li> -->
+                <a href="{{ url_for('about') }}">About</a>
+
+            </ul>
+        </div>
+        
+    </header>
+    <div class="container">
+        <div class="text-section">
+            <h1>Leaf Disease Identification Tool</h1>
+            <p>We cannot allow your plants to suffer from disorders and various diseases damages. Let’s begin treatment with our plant disease identifier.</p>
+          
+            <a href="{{ url_for('index') }}" class="button1">
+                <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png" alt="icon">
+                Diagnose a plant
+            </a>
+      
+        </div>
+        <div class="image-section">
+            <img src="{{ url_for('static', filename='images/farmer-adjusting-smart-sensors-tomato.webp') }}" length="150px" width="150px" alt="Plant 1">
+
+        
+        </div>
+    </div>
+    
+    <section class="intro">
+        <h2>Some Common Plant Diseases?</h2>
+    </section>
+       
+    <section class="disease-list">
+        <div class="disease-card">
+            <img src="{{ url_for('static', filename='images/small_lateblight_Tom_lesion3_min_bdba32e23e.webp') }}" alt="Late blight">
+            <h3>Late blight</h3>
+            <p class="info">Late Blight is the common designation for Phytophthora, a fungus-like microorganism. Usually associated with potato and tomato
+                 crops, it is broadly known for being one of the main reasons for the Irish Potato Famine. This water mold causes serious damage 
+                 to crops and, if left unattended, can destroy entire plantations. It enjoys moist and cool environments and water-saturated 
+                 conditions and can spread quickly in fields.</p>
+        </div>
+        <div class="disease-card">
+            <img src="{{ url_for('static', filename='images/small_cedar-apple-rust-main_d87554e0-28d0-47bd-98de-795561c3fcbe.webp') }}" alt="Cedar Apple Rust">
+            <h3>Cedar Apple Rust</h3>
+            <p class="info">The fungus Gymnosporangium tremelloides, which causes apple rust, is dangerous and very difficult to get rid of. Cedar Apple
+                 Rust is a mold manifested in a group of orange sticky appendages similar to tentacles. One of the biggest dangers posed by 
+                 this disease is the death of leaves and, in the most difficult cases, other plant organs as well. As a result of the damage,
+                  winter hardiness, yield, and quality of fruits, vegetables, and berries or vegetables are reduced, and in cases with grain 
+                  crops, a complete loss of grain properties. Usually, it is easy to notice the first signs of the appearance of rust can be 
+                  noticed in the last month of spring during the period of rainy weather.</p>
+        </div>
+        <div class="disease-card">
+            <img src="{{ url_for('static', filename='images/medium_Frogeye_spots_Botryosphaeria_obtusa_on_apple_leaf_217b473cf7.webp') }}" alt="Black rot">
+            <h3>Black rot</h3>
+            <p class="info">This bacterial disease mostly affects crucifers. The disease’s activity is visible in the upper parts of the affected plants. 
+                But in some cases, like radish or turnips, the fleshy roots are also damaged. When you notice that seedlings exhibit dwarfism 
+                or their lower leaves are dropping, there is a big chance that black rot is the reason behind it. But here’s a tricky thing: 
+                many black rot symptoms remind us of the consequences of drought or unbalanced watering, so before treating black rot disease, 
+                be sure about it.</p>
+        </div>
+        <div class="disease-card">
+            <img src="{{ url_for('static', filename='images/medium_TM_Jan20_diseases_pear_rust_lead_min_4ef6178cb5.webp') }}" alt="Rust">
+            <h3>Rust</h3>
+            <p class="info">More than 7 thousands of fungi species are responsible for this disease. A tell-tale sign of this problem is pustules of yellow
+                , orange, and brown powdery pustules that can be found on leaves, fruits, and shoots. Even visually, the rust on the plants is 
+                kind of similar to the regular one. Rust rarely kills the plant but reduces its growth and affects its look. Mild and moist
+                 conditions are the most favorable for this fungal disease. That’s why rust disease spreads after watering because wet surfaces 
+                 are generally suitable for fungi. Air is another way of spreading this disease because it is transferred by spores it has.</p>
+        </div>
+        <div class="disease-card">
+            <img src="{{ url_for('static', filename='images/small_Peach_Leaves_affected_by_Leaf_Curl_fcf.webp') }}" alt="Peach Leaf Curl">
+            <h3>Peach Leaf Curl</h3>
+            <p class="info">The fungus Taphrina Deformans causes this plant’s disease. As you can guess from the disease’s name, it affects Peach trees and 
+                other fruit trees like nectarines, apricots, and almonds. Sometimes it’s shortly known as ‘Curl’ and it doesn’t have mercy for 
+                the plant because it causes severe warp of the leaves in spring, destroying them prematurely. Its working time in spring is not
+                 coincidental because fungal spores are fond of warmth. The wet weather during this period even worsens the plant’s condition 
+                 since fungal spores can create new infections.</p>
+        </div>
+    </section>
+
+</body>
+</html>
